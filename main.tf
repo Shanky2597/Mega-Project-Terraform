@@ -197,17 +197,3 @@ resource "aws_eks_node_group" "devopsshack" {
     aws_iam_role_policy_attachment.devopsshack_node_group_registry_policy
   ]
 }
-
-# ---------------- EBS CSI Addon ----------------
-
-resource "aws_eks_addon" "ebs_csi_driver" {
-  cluster_name = aws_eks_cluster.devopsshack.name
-  addon_name   = "aws-ebs-csi-driver"
-
-  resolve_conflicts_on_create = "OVERWRITE"
-  resolve_conflicts_on_update = "OVERWRITE"
-
-  depends_on = [
-    aws_eks_node_group.devopsshack
-  ]
-}
